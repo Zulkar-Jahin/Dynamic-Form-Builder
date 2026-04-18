@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import { FormStateH3 } from './components/FormStateH3';
 
 function App() {
 
@@ -183,7 +184,7 @@ function App() {
                 <button
                   type="button"
                   className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600 transition-colors h-fit"
-                  onClick={()=>{handleDeleteField(item.id)}}
+                  onClick={() => { handleDeleteField(item.id) }}
                 >
                   Delete
                 </button>
@@ -214,18 +215,35 @@ function App() {
         </form>
 
 
+        {/* Form State Display Table with h3 tags - Question 3*/}
+        
 
-        {/* Form State Display Table */}
+
+        {/* Form State display with table - Question 8 */}
         <div className="mt-8 p-6 bg-gray-100 rounded-lg">
-          <h2 className="text-xl font-semibold mb-4 text-green-700">Form State:</h2>
-          {/* go throgh all items  */}
-          {formData.map((item, index) => (
-            <div key={item.id} className="mb-4">
-              <h3 className="text-lg">Field {index + 1}:</h3>
-              <h3 className="text-lg ml-4">Name: {item.name || '(empty)'}</h3>
-              <h3 className="text-lg ml-4">Category: {item.category || '(empty)'}</h3>
-            </div>
-          ))}
+          <h2 className="text-xl font-semibold mb-4 text-green-700">Form State (Table Format):</h2>
+
+          <table className="w-full border-collapse border border-gray-300">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="border border-gray-300 px-4 py-2 text-left"> Field </th>
+                <th className="border border-gray-300 px-4 py-2 text-left"> Name </th>
+                <th className="border border-gray-300 px-4 py-2 text-left"> Category </th>
+              </tr>
+            </thead>
+            <tbody>
+              {formData.map((item, index) => (
+                <tr
+                  key={item.id}
+                  className="hover:bg-gray-50">
+                  <td className="border border-gray-300 px-4 py-2"> {index + 1} </td>
+                  <td className="border border-gray-300 px-4 py-2"> {item.name || "(empty)"} </td>
+                  <td className="border border-gray-300 px-4 py-2"> {item.category || "(empty)"} </td>
+                </tr>
+
+              ))}
+            </tbody>
+          </table>
 
         </div>
 
