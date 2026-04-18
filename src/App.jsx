@@ -97,7 +97,7 @@ function App() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {/* error message condition */}
-              { errors.name && (<p className="text-red-500 text-bold  mt-1">{errors.name}</p>)}
+              {errors.name && (<p className="text-red-500 text-bold  mt-1">{errors.name}</p>)}
             </div>
 
             {/* select option section */}
@@ -115,7 +115,7 @@ function App() {
                 <option value="qa">QA / Tester</option>
               </select>
               {/* error message condition  */}
-              { errors.category && <p className="text-red-500 text-bold  mt-1"> {errors.category} </p>}
+              {errors.category && <p className="text-red-500 text-bold  mt-1"> {errors.category} </p>}
             </div>
           </div>
 
@@ -127,7 +127,19 @@ function App() {
             Submit
           </button>
 
+          <div className="mt-8 p-6 bg-gray-100 rounded-lg">
+            <h2 className="text-xl font-semibold mb-4 text-green-700">Form state : </h2>
+            <h3 className="text-lg"> Name: {formData.name}</h3>
+            <h3 className="text-lg"> Category: {formData.category}</h3>
+          </div>
+
+
         </form>
+
+
+
+
+
       </div>
     </div>
   )
