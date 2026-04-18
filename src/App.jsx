@@ -19,7 +19,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault(); // no page reload
-  
+
     const isValid = validateForm();
     if (isValid) {
       console.log("Form submitted successfully:", formData);
@@ -103,6 +103,25 @@ function App() {
     setNextId(nextId + 1);
   }
 
+  // when deleted a input 
+  const handleDeleteField = (id) => {
+    // cant delete all elements 
+    if (formData.length === 1) {
+      alert("At least one field is required!");
+      // console.log("At least one field is required!");
+      return;
+    }
+
+    // delete from Form-data 
+    setFormData(formData.filter((item) => {
+      return item.id !== id;
+    }));
+    // delete from errors list 
+    setErrors(errors.filter((item) => {
+      return item.id !== id;
+    }));
+  }
+
 
 
 
@@ -122,7 +141,6 @@ function App() {
           {/* Loop through all fields */}
           {formData.map((item, index) => (
 
-
             // input and select section
             <div key={item.id} className="flex gap-4 mb-6">
               {/* input field section */}
@@ -141,23 +159,37 @@ function App() {
               </div>
 
               {/* select option section */}
-              <div className="flex-1">
-                <select
-                  value={item.category}
-                  onChange={(e) => handleSelectChange(item.id, e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              <div className="flex-1 flex gap-2">
+
+
+                <div className="flex-1">
+                  <select
+                    value={item.category}
+                    onChange={(e) => handleSelectChange(item.id, e.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="">Select category</option>
+                    <option value="developer">Developer</option>
+                    <option value="designer">Designer</option>
+                    <option value="manager">Manager</option>
+                    <option value="other">Other</option>
+                  </select>
+                  {/* error message condition  */}
+                  {errors[index]?.category && (
+                    <p className="text-red-500 text-sm mt-1">{errors[index].category}</p>
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600 transition-colors h-fit"
+                  onClick={()=>{handleDeleteField(item.id)}}
                 >
-                  <option value="">Select category</option>
-                  <option value="developer">Developer</option>
-                  <option value="designer">Designer</option>
-                  <option value="manager">Manager</option>
-                  <option value="other">Other</option>
-                </select>
-                {/* error message condition  */}
-                {errors[index]?.category && (
-                  <p className="text-red-500 text-sm mt-1">{errors[index].category}</p>
-                )}
+                  Delete
+                </button>
               </div>
+
+
             </div>
           ))}
 
