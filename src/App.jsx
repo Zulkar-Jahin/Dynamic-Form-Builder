@@ -4,13 +4,35 @@ import './App.css'
 function App() {
 
   const [formData, setFormData] = useState({
-    name: '',
-    category: ''
+    name: "",
+    category: ""
+  });
+
+  const [errors, setErrors] = useState({
+    name: "",
+    category: ""
   });
 
   const handleSubmit = (e) => {
     e.preventDefault(); // no page reload
-    console.log("values are : ", formData);
+
+    const isValid = validateForm();
+    if (isValid) {
+      console.log("Submission successfully done.", formData);
+
+      //after valid submit, clear form and error
+      setFormData({
+        name: "",
+        category: ""
+      });
+      setErrors({
+        name: "",
+        category: ""
+      });
+    }
+    else {
+      console.log("Form has error.", formData);
+    }
   }
 
 
@@ -32,6 +54,24 @@ function App() {
     );
   }
 
+
+  const validateForm = () => {
+    const newErrors = {
+      name: "",
+      category: ""
+    };
+
+    if (!(formData.name.trim())) {
+      newErrors.name = "Name is required!";
+    }
+    if (!formData.category) {
+      newErrors.category = "Category is required!";
+    }
+
+    setErrors(newErrors); // set the message
+
+    return !(newErrors.name) && !(newErrors.category);
+  }
 
 
 
@@ -56,6 +96,8 @@ function App() {
                 onChange={handleInputChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              {/* error message condition */}
+              { errors.name && (<p className="text-red-500 text-bold  mt-1">{errors.name}</p>)}
             </div>
 
             {/* select option section */}
@@ -72,6 +114,8 @@ function App() {
                 <option value="mobile">Mobile App Developer</option>
                 <option value="qa">QA / Tester</option>
               </select>
+              {/* error message condition  */}
+              { errors.category && <p className="text-red-500 text-bold  mt-1"> {errors.category} </p>}
             </div>
           </div>
 
