@@ -34,10 +34,16 @@ export function FormField({ item, index, errors, fieldNumber, onInputChange, onS
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Select category</option>
-                <option value="developer">Developer</option>
-                <option value="designer">Designer</option>
-                <option value="manager">Manager</option>
-                <option value="other">Other</option>
+                <option value="frontend">Frontend Developer</option>
+                <option value="backend">Backend Developer</option>
+                <option value="fullstack">Full Stack Developer</option>
+                <option value="mobile">Mobile App Developer</option>
+                <option value="devops">DevOps Engineer</option>
+                <option value="qa">Quality Assurance (QA)</option>
+                <option value="uiux">UI/UX Designer</option>
+                <option value="product">Product Manager</option>
+                <option value="data">Data Analyst</option>
+                <option value="hr">Human Resources (HR)</option>
               </select>
               {/* error message condition  */}
               {errors[index]?.category && (
@@ -47,7 +53,7 @@ export function FormField({ item, index, errors, fieldNumber, onInputChange, onS
 
             <button
               type="button"
-              className="bg-red-600 text-white px-3 py-2 rounded-md hover:bg-red-700 transition-colors h-fit"
+              className="bg-red-600 text-white px-3 py-2 rounded-md hover:bg-red-700 transition-colors h-fit hover:scale-105 active:scale-95 transition-transform"
               onClick={() => onDelete(item.id)}
               title="Delete this field" 
             >

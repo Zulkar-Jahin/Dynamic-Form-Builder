@@ -155,7 +155,7 @@ function App() {
           <button
             type="button"
             onClick={handleAddField}
-            className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors mr-2"
+            className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors mr-2 hover:scale-105 active:scale-95 transition-transform"
           >
             Add Field
           </button>
@@ -163,7 +163,7 @@ function App() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors"
+            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors hover:scale-105 active:scale-95 transition-transform"
           >
             Submit Form
           </button>
