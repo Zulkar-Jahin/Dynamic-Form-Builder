@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './App.css'
-import { FormStateH3 } from './components/FormStateH3';
+import { FormField } from './components/FormField';
+import { FormStateH3 } from './components/FormStateH3'
+import { FormStateTable } from './components/FormStateTable';
 
 function App() {
 
@@ -78,7 +80,6 @@ function App() {
 
     setErrors(newErrors); // set the message
 
-
     // check all formdata if any item has error 
     let hasError = false;
     for (let i = 0; i < newErrors.length; i++) {
@@ -90,7 +91,6 @@ function App() {
 
     return !hasError;
   }
-
 
   // when added a new input
   const handleAddField = () => {
@@ -109,7 +109,6 @@ function App() {
     // cant delete all elements 
     if (formData.length === 1) {
       alert("At least one field is required!");
-      // console.log("At least one field is required!");
       return;
     }
 
@@ -123,9 +122,6 @@ function App() {
     }));
   }
 
-
-
-
   return (
 
     <div className="min-h-screen bg-gray-50 py-12 px-4">
@@ -134,123 +130,50 @@ function App() {
           Dynamic Form
         </h1>
 
-
+        <p className="text-gray-600 mb-8">
+          Add multiple fields, validate your data, and see real-time updates below.
+        </p>
 
         {/* form section */}
         <form onSubmit={handleSubmit}>
 
-          {/* Loop through all fields */}
+          {/* Form field component */}
           {formData.map((item, index) => (
-
-            // input and select section
-            <div key={item.id} className="flex gap-4 mb-6">
-              {/* input field section */}
-              <div className="flex-1">
-                <input
-                  type="text"
-                  placeholder="Enter your name"
-                  value={item.name}
-                  onChange={(e) => handleInputChange(item.id, e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {/* error message condition */}
-                {errors[index]?.name && (
-                  <p className="text-red-500 text-sm mt-1">{errors[index].name}</p>
-                )}
-              </div>
-
-              {/* select option section */}
-              <div className="flex-1 flex gap-2">
-
-
-                <div className="flex-1">
-                  <select
-                    value={item.category}
-                    onChange={(e) => handleSelectChange(item.id, e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    <option value="">Select category</option>
-                    <option value="developer">Developer</option>
-                    <option value="designer">Designer</option>
-                    <option value="manager">Manager</option>
-                    <option value="other">Other</option>
-                  </select>
-                  {/* error message condition  */}
-                  {errors[index]?.category && (
-                    <p className="text-red-500 text-sm mt-1">{errors[index].category}</p>
-                  )}
-                </div>
-
-                <button
-                  type="button"
-                  className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600 transition-colors h-fit"
-                  onClick={() => { handleDeleteField(item.id) }}
-                >
-                  Delete
-                </button>
-              </div>
-
-
-            </div>
+            <FormField
+              key={item.id}
+              item={item}
+              index={index}
+              errors={errors}
+              fieldNumber={index + 1}
+              onInputChange={handleInputChange}
+              onSelectChange={handleSelectChange}
+              onDelete={handleDeleteField}
+            />
           ))}
-
-
 
           {/* Plus Button */}
           <button
             type="button"
             onClick={handleAddField}
-            className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors mr-2"
+            className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors mr-2"
           >
-            + Add Field
+            Add Field
           </button>
 
           {/* Submit Button */}
           <button
             type="submit"
-            className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors"
+            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors"
           >
-            Submit
+            Submit Form
           </button>
+
         </form>
 
-
         {/* Form State Display Table with h3 tags - Question 3*/}
-        
-
-
+        <FormStateH3 formData={formData} />
         {/* Form State display with table - Question 8 */}
-        <div className="mt-8 p-6 bg-gray-100 rounded-lg">
-          <h2 className="text-xl font-semibold mb-4 text-green-700">Form State (Table Format):</h2>
-
-          <table className="w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-gray-200">
-                <th className="border border-gray-300 px-4 py-2 text-left"> Field </th>
-                <th className="border border-gray-300 px-4 py-2 text-left"> Name </th>
-                <th className="border border-gray-300 px-4 py-2 text-left"> Category </th>
-              </tr>
-            </thead>
-            <tbody>
-              {formData.map((item, index) => (
-                <tr
-                  key={item.id}
-                  className="hover:bg-gray-50">
-                  <td className="border border-gray-300 px-4 py-2"> {index + 1} </td>
-                  <td className="border border-gray-300 px-4 py-2"> {item.name || "(empty)"} </td>
-                  <td className="border border-gray-300 px-4 py-2"> {item.category || "(empty)"} </td>
-                </tr>
-
-              ))}
-            </tbody>
-          </table>
-
-        </div>
-
-
-
-
-
+        <FormStateTable formData={formData} />
 
       </div>
     </div>
