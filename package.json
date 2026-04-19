@@ -1,7 +1,12 @@
 {
   "name": "dynamic-form-builder",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A dynamic form builder with React and Tailwind CSS",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Zulkar-Jahin/Dynamic-Form-Builder"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
